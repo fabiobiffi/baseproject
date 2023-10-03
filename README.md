@@ -1,7 +1,9 @@
 # Base Project
 
 # Preliminary information
-write here
+This is the baseproject made by Fabio Biffi.
+With this project you have a solid code base with some "simil-production" containers.
+There is a base Django project with a customized Django admin interface.
 
 # Development
 ## Git hooks
@@ -35,7 +37,7 @@ docker compose up
 after that open a new terminal and
 
 ```bash
-docker exec -it application bash
+docker exec -it baseproject bash
 ```
 
 ```bash

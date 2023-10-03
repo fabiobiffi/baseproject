@@ -46,9 +46,10 @@ LOGIN_REDIRECT_URL = "/"
 
 INSTALLED_APPS = [
     # custom application
-    # "...",
+    "baseproject.apps.frontend",
 
     # default django application + pip packages
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -280,4 +281,44 @@ CKEDITOR_CONFIGS = {
             ["RemoveFormat", "Source"],
         ],
     }
+}
+
+
+# Jazzmin settings
+# https://django-jazzmin.readthedocs.io/configuration/
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Baseproject Admin",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Base Project",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Base Project",
+
+    # Welcome text on the login screen
+    "welcome_sign": "Welcome to Base Project",
+
+    # Copyright on the footer
+    "copyright": "Fabio Biffi",
+
+    ############
+    # Top Menu #
+    ############
+
+    # Links to put along the top menu
+    "topmenu_links": [
+        {"name": "Frontend Homepage",  "url": "/"},
+    ],
+
+    #############
+    # User Menu #
+    #############
+
+    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
+    "usermenu_links": [
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"model": "auth.user"}
+    ],
+
 }

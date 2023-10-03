@@ -80,6 +80,7 @@ reload = True
 #
 
 workers = 4
+worker_class = "baseproject.uviworker.RestartableUvicornWorker"
 worker_class = "uvicorn.workers.UvicornWorker"
 # worker_class = 'sync'
 # worker_connections = 1000 # This setting only affects the Eventlet and Gevent worker types.

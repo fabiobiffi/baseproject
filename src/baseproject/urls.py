@@ -13,9 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    # entire frontend urls, put it at last to prevent url conflict
+    path("", include("baseproject.apps.frontend.urls")),
 ]
+
+# adding the static files path
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# adding the uploaded files folder path
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# pagine custom di gestione degli errori http
+# handler404 = "baseproject.apps.frontend.views.handler404"
+# handler403 = "baseproject.apps.frontend.views.handler403"
+# handler500 = "baseproject.apps.frontend.views.handler500"

@@ -22,8 +22,8 @@ RUN systemctl enable cron
 
 WORKDIR /home
 RUN mkdir django
-RUN mkdir -p django/application
-WORKDIR /home/django/application
+RUN mkdir -p django/baseproject
+WORKDIR /home/django/baseproject
 
 COPY . .
 
