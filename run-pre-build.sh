@@ -2,10 +2,10 @@
 
 import os
 import sys
-result = os.system('black src/ --check')
+result = os.system('black src/baseproject/apps --check')
 
 if result > 0:
-    os.system('black src/')
+    os.system('black src/baseproject/apps')
     print("Reformatted files -> add them to GIT")
     sys.exit(1)
 else:

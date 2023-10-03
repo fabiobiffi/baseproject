@@ -1,15 +1,14 @@
 {% extends 'frontend/base.html' %}
-
+{% load static %}
 {% block extra_meta_content %}
 
 {% endblock %}
 
-{% comment %} something lik "Centro Mezzago - Prenota un campo" {% endcomment %}
 {% block title %}Homepage{% endblock %}
 
 {% comment %} custom imports for CSS and JavaScript {% endcomment %}
 {% block css_imports %}
-
+<link href="{% static 'css/homepage.css' %}" rel="stylesheet" /> 
 {% endblock %}
 
 {% comment %} page content block {% endcomment %}
@@ -22,6 +21,26 @@
                     This is the <a href="https://fabiobiffi.it">Fabio Biffi</a> BaseProject. A solid skeleton you can use 
                     for your personal project.
                 </p>
+
+                <h4>What is inside this project?</h4>
+                <p>With the Base Project you have:</p>
+                <ul>
+                    <li>Docker containers with microservices
+                        <ul>
+                            <li>Nginx</li>
+                            <li>MySql</li>
+                            <li>Application
+                                <ul>
+                                    <li>Django: <a href="https://www.djangoproject.com/" target="_blank">https://www.djangoproject.com/</a></li>
+                                    <li>Jazzmin: <a href="https://django-jazzmin.readthedocs.io/" target="_blank">https://django-jazzmin.readthedocs.io/</a></li>
+                                    <li>Bootstrap: <a href="https://getbootstrap.com/" target="_blank">https://getbootstrap.com/</a></li>
+                                    <li>VueJS (as CDN): <a href="https://vuejs.org/guide/quick-start.html#using-vue-from-cdn" target="_blank">https://vuejs.org/guide/quick-start.html#using-vue-from-cdn</a></li>
+                                </ul>
+                            </li>
+                            <li>Application Test</li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
