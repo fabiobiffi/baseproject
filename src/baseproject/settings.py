@@ -47,7 +47,6 @@ LOGIN_REDIRECT_URL = "/"
 INSTALLED_APPS = [
     # custom application
     "baseproject.apps.frontend",
-
     # default django application + pip packages
     "jazzmin",
     "django.contrib.admin",
@@ -102,35 +101,37 @@ WSGI_APPLICATION = "baseproject.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DEV_DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'baseproject',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "baseproject",
     }
 }
-PROD_DATABASES = os.environ.get("DATABASES", {
-    "default": {
-        "ENGINE": os.environ.get("DATABASE_ENGINE"),
-        "NAME":  os.environ.get("MYSQL_DATABASE"),
-        "USER": os.environ.get("MYSQL_USER"),
-        "PASSWORD": os.environ.get("MYSQL_PASSWORD"),
-        # the name of the container if we are using docker
-        "HOST": os.environ.get("DATABASE_HOST"),
-        "PORT": os.environ.get("DATABASE_PORT"),
-
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-            'use_unicode': True,
-        },
-    }
-})
+PROD_DATABASES = os.environ.get(
+    "DATABASES",
+    {
+        "default": {
+            "ENGINE": os.environ.get("DATABASE_ENGINE"),
+            "NAME": os.environ.get("MYSQL_DATABASE"),
+            "USER": os.environ.get("MYSQL_USER"),
+            "PASSWORD": os.environ.get("MYSQL_PASSWORD"),
+            # the name of the container if we are using docker
+            "HOST": os.environ.get("DATABASE_HOST"),
+            "PORT": os.environ.get("DATABASE_PORT"),
+            "OPTIONS": {
+                "charset": "utf8mb4",
+                "use_unicode": True,
+            },
+        }
+    },
+)
 
 DATABASES = PROD_DATABASES
 
 # Logging management
-LOG_DIR = os.path.join(PRJ_DIR, 'logs')
-INFO_LOG_FILE = os.path.join(LOG_DIR, 'info.log')
-WARNING_LOG_FILE = os.path.join(LOG_DIR, 'warning.log')
-ERROR_LOG_FILE = os.path.join(LOG_DIR, 'error.log')
+LOG_DIR = os.path.join(PRJ_DIR, "logs")
+INFO_LOG_FILE = os.path.join(LOG_DIR, "info.log")
+WARNING_LOG_FILE = os.path.join(LOG_DIR, "warning.log")
+ERROR_LOG_FILE = os.path.join(LOG_DIR, "error.log")
 
 # Crea la directory dei log se non esiste
 if not os.path.exists(LOG_DIR):
@@ -138,74 +139,78 @@ if not os.path.exists(LOG_DIR):
 
 # logging configuration
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
+    "version": 1,
+    "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
             "format": "[{levelname}] [{asctime}] [{filename} {lineno}]: {message}",
             "style": "{",
         },
     },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
-        'info_file': {
-            'level': 'INFO',
-            'class': 'concurrent_log_handler.ConcurrentRotatingFileHandler',
-            'filename': INFO_LOG_FILE,
-            'maxBytes': 10485760,  # 10MB
-            'backupCount': 7,
+        "info_file": {
+            "level": "INFO",
+            "class": "concurrent_log_handler.ConcurrentRotatingFileHandler",
+            "filename": INFO_LOG_FILE,
+            "maxBytes": 10485760,  # 10MB
+            "backupCount": 7,
             "formatter": "verbose",
         },
-        'warning_file': {
-            'level': 'WARNING',
-            'class': 'concurrent_log_handler.ConcurrentRotatingFileHandler',
-            'filename': WARNING_LOG_FILE,
-            'maxBytes': 10485760,  # 10MB
-            'backupCount': 7,
+        "warning_file": {
+            "level": "WARNING",
+            "class": "concurrent_log_handler.ConcurrentRotatingFileHandler",
+            "filename": WARNING_LOG_FILE,
+            "maxBytes": 10485760,  # 10MB
+            "backupCount": 7,
             "formatter": "verbose",
         },
-        'error_file': {
-            'level': 'ERROR',
-            'class': 'concurrent_log_handler.ConcurrentRotatingFileHandler',
-            'filename': ERROR_LOG_FILE,
-            'maxBytes': 10485760,  # 10MB
-            'backupCount': 7,
+        "error_file": {
+            "level": "ERROR",
+            "class": "concurrent_log_handler.ConcurrentRotatingFileHandler",
+            "filename": ERROR_LOG_FILE,
+            "maxBytes": 10485760,  # 10MB
+            "backupCount": 7,
             "formatter": "verbose",
         },
     },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": True,
         },
-        'django': {
-            'handlers': ['info_file', 'warning_file', 'error_file'],
-            'level': 'DEBUG',
-            'propagate': False,
+        "django": {
+            "handlers": ["info_file", "warning_file", "error_file"],
+            "level": "DEBUG",
+            "propagate": False,
         },
     },
 }
 
 # Password validation + user model
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
-AUTH_PASSWORD_VALIDATORS = [] if DEBUG else [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
+AUTH_PASSWORD_VALIDATORS = (
+    []
+    if DEBUG
+    else [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        },
+    ]
+)
 
 # email settings (please define them in env_settings.py file)
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "")
@@ -289,36 +294,27 @@ CKEDITOR_CONFIGS = {
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "Baseproject Admin",
-
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": "Base Project",
-
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "Base Project",
-
     # Welcome text on the login screen
     "welcome_sign": "Welcome to Base Project",
-
     # Copyright on the footer
     "copyright": "Fabio Biffi",
-
     ############
     # Top Menu #
     ############
-
     # Links to put along the top menu
     "topmenu_links": [
-        {"name": "Frontend Homepage",  "url": "/"},
+        {"name": "Frontend Homepage", "url": "/"},
     ],
-
     #############
     # User Menu #
     #############
-
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
         {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-        {"model": "auth.user"}
+        {"model": "auth.user"},
     ],
-
 }
