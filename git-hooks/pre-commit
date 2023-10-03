@@ -1,6 +1,6 @@
 #!/bin/sh
 
 # running test container
-docker compose -f docker-compose-test.yml up --exit-code-from baseproject-test --build
+docker compose -f docker-compose-test.yml up --exit-code-from baseproject-test
 RESULT=$?
 exit $RESULT
