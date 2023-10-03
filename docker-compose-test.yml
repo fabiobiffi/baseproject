@@ -15,5 +15,5 @@ services:
 
     # mounting volumes <your local path>:<container path>
     volumes:
-      - .:/build/
+      - .:/home/django/baseproject/
 
