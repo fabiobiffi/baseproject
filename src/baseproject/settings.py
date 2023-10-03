@@ -129,9 +129,8 @@ DATABASES = PROD_DATABASES
 
 # Logging management
 LOG_DIR = os.path.join(PRJ_DIR, "logs")
-INFO_LOG_FILE = os.path.join(LOG_DIR, "info.log")
-WARNING_LOG_FILE = os.path.join(LOG_DIR, "warning.log")
-ERROR_LOG_FILE = os.path.join(LOG_DIR, "error.log")
+DEBUG_LOG_FILE = os.path.join(LOG_DIR, "logs.log")
+ERROR_LOG_FILE = os.path.join(LOG_DIR, "errors.log")
 
 # Crea la directory dei log se non esiste
 if not os.path.exists(LOG_DIR):
@@ -152,18 +151,10 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
-        "info_file": {
+        "file": {
             "level": "INFO",
             "class": "concurrent_log_handler.ConcurrentRotatingFileHandler",
-            "filename": INFO_LOG_FILE,
-            "maxBytes": 10485760,  # 10MB
-            "backupCount": 7,
-            "formatter": "verbose",
-        },
-        "warning_file": {
-            "level": "WARNING",
-            "class": "concurrent_log_handler.ConcurrentRotatingFileHandler",
-            "filename": WARNING_LOG_FILE,
+            "filename": DEBUG_LOG_FILE,
             "maxBytes": 10485760,  # 10MB
             "backupCount": 7,
             "formatter": "verbose",
@@ -184,8 +175,8 @@ LOGGING = {
             "propagate": True,
         },
         "django": {
-            "handlers": ["info_file", "warning_file", "error_file"],
-            "level": "DEBUG",
+            "handlers": ["file", "error_file"],
+            "level": "INFO",
             "propagate": False,
         },
     },
