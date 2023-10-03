@@ -23,9 +23,11 @@ Ensure that all directories such `static` or `uploaded` have right permissions
 If you want to run BaseProject in a "simil-prod" environment
 
 ```bash
-docker compose up
+docker compose up --build
 ```
 after that you can visit http://localhost/
+
+You have to use `--build` flag only the first time you launch the project (when you have to create images)
 
 ### Developing environment
 if you want to work and debug on BaseProject
