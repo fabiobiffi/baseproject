@@ -1,0 +1,90 @@
+# TODO use env variables for secrets
+
+version: "3.9"
+
+networks:
+  baseproject_lan:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+services:
+  
+  baseproject:
+    image: baseproject:latest
+    container_name: baseproject
+    build: 
+      dockerfile: ci/dockerfiles/prod/Dockerfile
+      context: .
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+      # only for development - enter to the container and run runserver 0.0.0.0:8001
+      - "8001:8001" 
+    networks:
+      baseproject_lan:
+        ipv4_address: 172.20.0.11
+    volumes:
+      # mounting volumes <your local path>:<container path>
+      - .:/home/django/baseproject/
+    depends_on:
+      baseproject_mysql:
+        condition: service_healthy
+  
+  baseproject_mysql:
+    container_name: baseproject_mysql
+    image: baseproject_mysql:latest
+    build: 
+      dockerfile: ci/dockerfiles/mysql/Dockerfile
+      context: .
+    ports:
+      - "3306:3306"
+    networks:
+      baseproject_lan:
+        ipv4_address: 172.20.0.12
+    env_file:
+      - .env
+    volumes:
+      - baseproject-mysql-data-volume:/var/lib/mysql
+    healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 20s
+            retries: 10
+
+  baseproject_phpmyadmin:
+    container_name: baseproject_phpmyadmin
+    image: phpmyadmin
+    ports:
+      - 8002:80
+    networks:
+      baseproject_lan:
+        ipv4_address: 172.20.0.13
+    env_file:
+      - .env
+
+  baseproject_nginx:
+    container_name: baseproject_nginx
+    image: baseproject_nginx:latest
+    build:
+      dockerfile: ci/dockerfiles/nginx/Dockerfile
+      context: .
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    ports:
+      - "80:80"
+    networks:
+      baseproject_lan:
+        ipv4_address: 172.20.0.14
+    # volumes for static files and uploaded files
+    volumes:
+      - .:/home/django/baseproject
+      - ./static:/home/django/baseproject/static
+      - ./uploaded:/home/django/baseproject/uploaded
+    depends_on:
+      - baseproject
+
+# defining volumes
+volumes:
+  baseproject-mysql-data-volume:

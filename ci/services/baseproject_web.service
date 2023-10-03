@@ -1,0 +1,12 @@
+[Unit]
+Description="Baseproject Web Service"
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+WorkingDirectory=/baseproject.cloud/src/
+EnvironmentFile=/baseproject.cloud/.env
+ExecStart=gunicorn baseproject.asgi:application -c baseproject/gunicorn.py
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+
+  # configuration of "baseproject-test" service
+  baseproject-test:
+
+    container_name: baseproject-test
+    # options for the building process
+    build:
+      dockerfile: ci/dockerfiles/test/Dockerfile
+      context: .
+    working_dir:  /home/django/baseproject
+    command: ./run-pre-build.sh
+
+    # mounting volumes <your local path>:<container path>
+    volumes:
+      - .:/build/
+
