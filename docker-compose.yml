@@ -9,11 +9,10 @@ networks:
         - subnet: 172.20.0.0/24
 
 services:
-  
   baseproject:
     image: baseproject:latest
     container_name: baseproject
-    build: 
+    build:
       dockerfile: ci/dockerfiles/prod/Dockerfile
       context: .
     env_file:
@@ -21,7 +20,7 @@ services:
     ports:
       - "8000:8000"
       # only for development - enter to the container and run runserver 0.0.0.0:8001
-      - "8001:8001" 
+      - "8001:8001"
     networks:
       baseproject_lan:
         ipv4_address: 172.20.0.11
@@ -31,11 +30,11 @@ services:
     depends_on:
       baseproject_mysql:
         condition: service_healthy
-  
+
   baseproject_mysql:
     container_name: baseproject_mysql
     image: baseproject_mysql:latest
-    build: 
+    build:
       dockerfile: ci/dockerfiles/mysql/Dockerfile
       context: .
     ports:
@@ -48,9 +47,9 @@ services:
     volumes:
       - baseproject-mysql-data-volume:/var/lib/mysql
     healthcheck:
-            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-            timeout: 20s
-            retries: 10
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   baseproject_phpmyadmin:
     container_name: baseproject_phpmyadmin

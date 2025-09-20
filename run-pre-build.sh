@@ -2,11 +2,11 @@
 
 import os
 import sys
-result = os.system('black src/ --check')
+result = os.system('ruff check --fix src/')
 
 if result > 0:
-    os.system('black src/')
-    print("Reformatted files -> add them to GIT")
+    os.system('ruff format src/')
+    print("⚠️ Reformatted files -> add them to GIT")
     sys.exit(1)
 else:
     result = 0
@@ -16,4 +16,5 @@ else:
     if result > 0:
         sys.exit(2)
 
+print("✅ All tests passed !!!")
 sys.exit(0)

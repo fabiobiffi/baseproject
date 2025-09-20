@@ -11,11 +11,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 # pylint: skip-file
-
+from django.templatetags.static import static
 import ast
 from pathlib import Path
 import os
 from concurrent_log_handler import ConcurrentRotatingFileHandler
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 
 # Base project version
@@ -36,7 +38,7 @@ PRJ_DIR = BASE_DIR.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = ast.literal_eval(os.environ.get("DEBUG", False))
+DEBUG = ast.literal_eval(os.environ.get("DEBUG", "False"))
 
 ALLOWED_HOSTS = ["*"]
 
@@ -48,7 +50,7 @@ INSTALLED_APPS = [
     # custom application
     "baseproject.apps.frontend",
     # default django application + pip packages
-    "jazzmin",
+    "unfold",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -279,33 +281,69 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-
-# Jazzmin settings
-# https://django-jazzmin.readthedocs.io/configuration/
-JAZZMIN_SETTINGS = {
-    # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Baseproject Admin",
-    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Base Project",
-    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Base Project",
-    # Welcome text on the login screen
-    "welcome_sign": "Welcome to Base Project",
-    # Copyright on the footer
-    "copyright": "Fabio Biffi",
-    ############
-    # Top Menu #
-    ############
-    # Links to put along the top menu
-    "topmenu_links": [
-        {"name": "Frontend Homepage", "url": "/"},
-    ],
-    #############
-    # User Menu #
-    #############
-    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
-    "usermenu_links": [
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-        {"model": "auth.user"},
-    ],
+# Django unfold, for admin panel
+UNFOLD = {
+    "SITE_TITLE": "BASEPROJECT Backend",
+    "SITE_HEADER": "BASEPROJECT",
+    "SITE_URL": "/",
+    # "SITE_ICON": lambda request: static("database/img/logo.png"),
+    # "SITE_LOGO": lambda request: static("database/img/logo.png"),
+    # "DASHBOARD_CALLBACK": "baseproject.apps.frontend.views.dashboard_callback",
+    # "LOGIN": {
+    #     "image": lambda request: static("database/img/login_wallpaper.png"),
+    # },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": True,
+        "navigation": [
+            {
+                "title": _("Reports"),
+                "items": [
+                    {
+                        "title": _("Dashboard"),
+                        "icon": "dashboard",
+                        "link": reverse_lazy("admin:index"),
+                    },
+                ],
+            },
+            {
+                "title": _("Authentication"),
+                "items": [
+                    {
+                        "title": _("Users"),
+                        "icon": "person",
+                        "link": reverse_lazy("admin:auth_user_changelist"),
+                    },
+                    {
+                        "title": _("Groups"),
+                        "icon": "group",
+                        "link": reverse_lazy("admin:auth_group_changelist"),
+                    },
+                ],
+            },
+        ],
+    },
+    "COLORS": {
+        "font": {
+            "subtle-light": "107 114 128",
+            "subtle-dark": "156 163 175",
+            "default-light": "75 85 99",
+            "default-dark": "209 213 219",
+            "important-light": "17 24 39",
+            "important-dark": "243 244 246",
+        },
+        "primary": {
+            "50":  "#E0F7FF",
+            "100": "#BAEFFF",
+            "200": "#94E6FF",
+            "300": "#6EDCFF",
+            "400": "#48D3FF",
+            "500": "#22C9FF",
+            "600": "#00AEE6",
+            "700": "#0088B3",
+            "800": "#006280",
+            "900": "#003C4D",
+            "950": "#001A26"
+        },
+    },
 }

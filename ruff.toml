@@ -1,0 +1,97 @@
+line-length = 100
+
+[format]
+quote-style = "double"
+indent-style = "space"
+
+[lint]
+select = [
+    "I",        # isort: https://docs.astral.sh/ruff/rules/#isort-i
+
+    "B",        # https://docs.astral.sh/ruff/rules/#flake8-bugbear-b
+    "DJ",       # https://docs.astral.sh/ruff/rules/#flake8-django-dj  - only 2 errors reported
+    "E",        # https://docs.astral.sh/ruff/rules/#error-e
+    "F",        # https://docs.astral.sh/ruff/rules/#pyflakes-f - Enabled by default
+    "G",        # https://docs.astral.sh/ruff/rules/#flake8-logging-format-g,
+    "W",        # Pycodestyle Warnings: https://docs.astral.sh/ruff/rules/#warning-w
+    "PL",       # Pylint: https://docs.astral.sh/ruff/rules/#pylint-pl
+    "EM",       # https://docs.astral.sh/ruff/rules/#flake8-errmsg-em - Flake Error messages
+    "T10",      # https://docs.astral.sh/ruff/rules/#flake8-debugger-t10 - debugger statements
+    "T20",      # https://docs.astral.sh/ruff/rules/#flake8-print-t20 - useless print statements
+
+    "F821",     # https://docs.astral.sh/ruff/rules/undefined-name/ - fails detecting some undefined names
+
+    "SIM103",   # return negated condition directly
+    "SIM110",   # return any(...)
+    "SIM116",   # Dictionary instead of if statements
+    "SIM201",   # 'not x == y' -> 'x != y'
+    "SIM210",   # Unnecessary 'True if {cond} else False' -> 'return {cond}'
+    "SIM211",   # Unnecessary 'False if {cond} else True' -> 'return not {cond}'
+    "SIM300",   # Yoda conditions
+    "SIM401",   # Use 'dict.get(key)' instead of 'dict[key] if key in dict'
+    "SIM910",   # 'dict.get(key, None)' -> 'dict.get(key)'
+
+    "N801",     # Class capital letters
+    "N802",     # methods lower case
+    "N803",     # Invalid argument name: https://docs.astral.sh/ruff/rules/invalid-argument-name/
+
+    "PERF102",  # Useless dict.keys() and dict.values() calls
+    "PERF402",  # Manual list copy https://docs.astral.sh/ruff/rules/manual-list-copy/
+
+    "PLC3002",  # Lambda called directly
+    "PLE1205",  # Too many arguments in logging format string
+    "PLR0133",  # Two constants compared
+    "PLR0206",  # Properties should not have arguments
+    "PLR0402",  # Useless alias?
+    "PLR1704",  # Redefined function argument (shadowing)
+    "PLR2044",  # Empty comments
+    "PLW0127",  # Self-assignments
+    "PLW0128",  # Redeclared variable
+
+    "ANN001",   # https://docs.astral.sh/ruff/rules/missing-type-function-argument/#missing-type-function-argument-ann001
+    "ANN201",   # Missing return type: https://docs.astral.sh/ruff/rules/missing-return-type-undocumented-public-function/#missing-return-type-undocumented-public-function-ann201
+]
+
+unfixable = [
+    "PLR5501",
+    "B009",
+    "B010",
+    "PLR0402"
+]
+
+# Worth considering:
+# "PLR0911": Too many return statements
+# "PLR0912": Too many branches
+# "PLR0913": Too many function args
+# "PLR0915": Too many statements
+
+ignore = [
+    "W605",     # https://docs.astral.sh/ruff/rules/invalid-escape-sequence/ - fails detecting regexps
+    "F405",     # Use of import with wildcards: https://docs.astral.sh/ruff/rules/undefined-local-with-import-star-usage/#undefined-local-with-import-star-usage-f405
+    "EM101",
+    "PLR0912",
+    "PLR0915",
+    "PLR0911",
+    "EM102",
+    "E501",
+    "PLR0913",
+    "B009",
+    "PLR2004",
+    "PLR6301"
+]
+
+
+[lint.per-file-ignores]
+"src/baseproject/settings.py" = ["ALL"]
+"src/manage.py" = ["ALL"]
+"src/baseproject/apps/database/migrations/**" = ["ALL"]
+"**/__init__.py" = ['ALL']
+
+"src/config/**/*.py" = ['F401']         # Unused import ignore in config files
+"src/pymodm/**/*.py" = ['F401']         # Unused import ignore in config files
+"src/api/DRFpymodm/**/*.py" = ['F401']  # Unused import ignore in config files
+"src/fabfile.py" = ["T20"]              # Ignore print statements in fabfile
+"src/lib/payments/**/*" = ["N815"]      # https://docs.astral.sh/ruff/rules/mixed-case-variable-in-class-scope/ - Used for validators
+"tests/**/*.py" = ["ANN"]               # No annotation for tests
+"docs/*.png" = ["E902"]                 # No annotation for docs images
+"src/.python-version" = ["B018"]        # No annotation for non py files
