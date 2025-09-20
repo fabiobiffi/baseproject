@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 # pylint: skip-file
-from django.templatetags.static import static
+# from django.templatetags.static import static
 import ast
 from pathlib import Path
 import os
