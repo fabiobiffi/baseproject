@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -qq -y \
     cron \
     systemctl \
     nano \
+    gettext \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home
