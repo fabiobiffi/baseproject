@@ -30,6 +30,10 @@ WEBSITE_URL = ""
 BASE_DIR = Path(__file__).resolve().parent.parent
 PRJ_DIR = BASE_DIR.parent
 
+# locale dir
+LOCALE_PATHS = [
+    PRJ_DIR / "locale", # locale folder at root level
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
