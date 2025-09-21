@@ -49,3 +49,26 @@ python manage.py runserver 0.0.0.0:8001 --insecure
 NB: `--insecure` is mandatory if you want see static files with `DEBUG=False`
 
 Now you can visit http://localhost:8001
+
+
+
+## Translations
+1. go inside the container
+
+```bash
+docker exec -it onlite_manager bash
+```
+
+2. run makemessages command
+```bash
+cd src/
+python manage.py makemessages
+```
+
+3. edit translations manually inside the django.po files
+
+4. compile the messages
+```bash
+cd src/
+python manage.py makemessages
+```
