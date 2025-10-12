@@ -56,7 +56,7 @@ Now you can visit http://localhost:8001
 1. go inside the container
 
 ```bash
-docker exec -it onlite_manager bash
+docker exec -it baseproject bash
 ```
 
 2. run makemessages command
