@@ -46,7 +46,7 @@ docker exec -it baseproject bash
 
 ```bash
 cd src/
-python manage.py runserver 0.0.0.0:8001 --insecure
+uv run python manage.py runserver 0.0.0.0:8001 --insecure
 ```
 NB: `--insecure` is mandatory if you want see static files with `DEBUG=False`
 
