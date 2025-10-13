@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -qq -y \
     libpq-dev \
     mime-support \
     python3-dev \
-    default-libmysqlclient-dev \
     cron \
     systemctl \
     nano \

@@ -11,7 +11,6 @@ dependencies = [
 
     # Database
     "psycopg2-binary==2.9.11",
-    "mysqlclient==2.1.1",
 
     # REST API
     "djangorestframework==3.16.1",
