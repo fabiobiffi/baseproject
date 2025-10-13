@@ -2,16 +2,16 @@
 
 import os
 import sys
-result = os.system('ruff check --fix src/')
+result = os.system('uv run ruff check --fix src/')
 
 if result > 0:
-    os.system('ruff format src/')
+    os.system('uv run ruff format src/')
     print("⚠️ Reformatted files -> add them to GIT")
     sys.exit(1)
 else:
     result = 0
-    result += os.system("pylint --load-plugins pylint_django --django-settings-module=baseproject.settings --rc-file .pylintrc src/")
-    result += os.system("pytest tests/")
+    result += os.system("uv run pylint --load-plugins pylint_django --django-settings-module=baseproject.settings --rc-file .pylintrc src/")
+    result += os.system("uv run pytest tests/")
 
     if result > 0:
         sys.exit(2)

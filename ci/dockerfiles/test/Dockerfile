@@ -1,4 +1,4 @@
-FROM python:3.10-slim-bullseye
+FROM python:3.13-slim-bookworm
 
 USER root
 
@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -qq -y \
     gettext \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
+# install uv package manager
+RUN pip install uv
+
 WORKDIR /home
 RUN mkdir django
 RUN mkdir -p django/baseproject
@@ -25,6 +28,8 @@ WORKDIR /home/django/baseproject
 
 COPY . .
 
-RUN pip install -r conf/virtualenv/requirements.txt
+# install dependencies
+# RUN pip install -r conf/virtualenv/requirements.txt
+RUN uv sync --frozen
 
 CMD ["bash"]
