@@ -20,10 +20,12 @@ Ensure that all directories such `static` or `uploaded` have right permissions
 (no root owner).
 
 ### Simil prod environment
-If you want to run BaseProject in a "simil-prod" environment
+If you want to run BaseProject in a "simil-prod" environment. Ensure that you have the `make`
+command installed in your machine. Make is a GNU command so if you are working on Linux or MacOS
+you already have the command installed. If you are on Windows see this: https://gnuwin32.sourceforge.net/packages/make.htm
 
 ```bash
-docker compose up --build
+make dev-up-build
 ```
 after that you can visit http://localhost/
 

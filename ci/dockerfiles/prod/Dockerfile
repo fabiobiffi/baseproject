@@ -31,4 +31,6 @@ COPY . .
 RUN pip install -r conf/virtualenv/requirements.txt
 
 EXPOSE 8000
+
+# CMD ["tail", "-f", "/dev/null"]
 CMD ["ci/scripts/entrypoint.sh"]

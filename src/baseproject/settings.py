@@ -117,16 +117,16 @@ PROD_DATABASES = os.environ.get(
     {
         "default": {
             "ENGINE": os.environ.get("DATABASE_ENGINE"),
-            "NAME": os.environ.get("MYSQL_DATABASE"),
-            "USER": os.environ.get("MYSQL_USER"),
-            "PASSWORD": os.environ.get("MYSQL_PASSWORD"),
+            "NAME": os.environ.get("POSTGRES_DB"),
+            "USER": os.environ.get("POSTGRES_USER"),
+            "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
             # the name of the container if we are using docker
             "HOST": os.environ.get("DATABASE_HOST"),
             "PORT": os.environ.get("DATABASE_PORT"),
-            "OPTIONS": {
-                "charset": "utf8mb4",
-                "use_unicode": True,
-            },
+            # "OPTIONS": {
+            #     "charset": "utf8mb4",
+            #     "use_unicode": True,
+            # },
         }
     },
 )

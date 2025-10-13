@@ -11,3 +11,6 @@ dev-up-build: dev-down  ## Build and spin up compose
 
 dev-down: ## Spin down compose
 	docker compose -f ${COMPOSE_DEV} down -v
+
+clean: dev-down ## Clean all docker images
+	docker system prune -a --volumes -f
