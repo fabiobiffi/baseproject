@@ -64,7 +64,7 @@ docker exec -it baseproject bash
 2. run makemessages command
 ```bash
 cd src/
-python manage.py makemessages
+uv run python manage.py makemessages
 ```
 
 3. edit translations manually inside the django.po files
@@ -72,5 +72,5 @@ python manage.py makemessages
 4. compile the messages
 ```bash
 cd src/
-python manage.py makemessages
+uv run python manage.py makemessages
 ```
