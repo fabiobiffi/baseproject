@@ -2,8 +2,8 @@ export DOCKER_DEFAULT_PLATFORM=linux/amd64
 COMPOSE_DEV=docker-compose.yml
 
 # DOCKER TASKS
-dev-up: ## Spin up compose
-	docker compose -f ${COMPOSE_DEV} up
+dev-up: dev-down ## Spin up compose
+	docker compose -f ${COMPOSE_DEV} up -d
 
 dev-up-build: dev-down  ## Build and spin up compose
 	docker compose -f ${COMPOSE_DEV} down -v

@@ -76,4 +76,9 @@ services:
 
 # defining volumes
 volumes:
-  baseproject-postgres-data-volume:
+  postgres-data-volume:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/docker/postgres-data
+      o: bind
