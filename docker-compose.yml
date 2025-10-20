@@ -80,5 +80,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/docker/postgres-data
+      device: ${PWD}/postgres-data
       o: bind
