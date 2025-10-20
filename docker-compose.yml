@@ -45,7 +45,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
       - POSTGRES_DB=${POSTGRES_DB:-baseproject}
     volumes:
-      - baseproject-postgres-data-volume:/var/lib/postgresql/data
+      - postgres-data-volume:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-baseproject} -h localhost"]
       interval: 10s
