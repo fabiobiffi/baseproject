@@ -9,7 +9,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-docker/**
+postgres-data/**
 .Python
 build/
 develop-eggs/
